@@ -1,9 +1,11 @@
 /* eslint-disable quotes */
 import Movies from "./movies";
 import "./style.css";
+import counter from "./counter";
 
-const commentUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/oFkkXhh8ZCM14YoilhgC/comments/";
-
+const likeUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/";
+const navCount = document.getElementById("nav-count");
+const commentUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/JJx6HiQiv6e42ZBiY0mG/comments";
 const myMovies = new Movies();
 
 const modalFnc = async (id) => {
@@ -11,17 +13,31 @@ const modalFnc = async (id) => {
   const modalContent = document.getElementById("modalContent");
   const getMovie = await myMovies.getMovie(id);
   const getComments = async () => {
-    const request = await fetch(
-      `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/oFkkXhh8ZCM14YoilhgC/comments?item_id=${id}`,
-    );
+    const request = await fetch(`${commentUrl}?item_id=${id}`);
     let data = [];
 
     data = await request.json();
     return data;
   };
-  modalContent.innerHTML = `<span class="close">&times;</span>
-    <img src='${getMovie.image.original}' width='200px' alt=''/>
-    ${getMovie.summary}
+  modalContent.innerHTML = `<div class="close-icon"><span class="close">&times;</span></div>
+  <div class="movie-section">
+  <div class="movie-head">
+    <img src='${getMovie.image.original}' class="movie-modal-img" width='200px' alt=''/>
+    <h2>${getMovie.name}</h2>
+  </div>
+  <div class="movie-desc">${getMovie.summary}</div>
+  </div>
+  <div class="movie-infos">
+    <div class="movie-info">
+      <p>rating:</p> <p>${getMovie.rating.average}</p>
+    </div>
+    <div class="movie-info">
+      <p>status:</p> <p>${getMovie.status}</p>
+    </div>
+    <div class="movie-info">
+      <p>type:</p> <p>${getMovie.type}</p>
+    </div>
+  </div>
    <h2 id="commentCount"></h2>
     <ul id="commentUl">
     
@@ -29,26 +45,41 @@ const modalFnc = async (id) => {
     <h3>Add a Comment</h3>
 
     <form id="myForm" action="" onsubmit="postComment">
-      <input type="text" name="fname" id="username" placeholder="Your name"><br>
-      <textarea name="lname" id="insight" cols="30" rows="10"></textarea><br>
-      <input type="submit" value="Submit" id="submit">
+    <input type="text" class="form-input" name="fname" id="username" placeholder="Your name"><br>
+    <textarea name="lname" class="form-input" id="insight" cols="10" rows="5"></textarea><br>
+    <input type="submit" class="submit" value="Submit" id="submit">
     </form>
   `;
 
   const commentUl = document.getElementById("commentUl");
-  let commentList = await getComments();
-  if (commentList.error) {
-    commentList = [];
-  }
+  let commentList = [];
 
-  commentList.forEach((comment) => {
-    const li = document.createElement("li");
-    li.innerHTML = ` ${comment.username}: ${comment.creation_date} ${comment.comment}`;
-    commentUl.appendChild(li);
-  });
+  const getCommentList = async () => {
+    commentList = await getComments();
+    if (commentList.error) {
+      commentList = [];
+    }
+  };
+
+  await getCommentList();
+
+  const drawComments = async () => {
+    await getCommentList();
+    const liToRemove = document.querySelectorAll("#commentUl li");
+    liToRemove.forEach((item) => {
+      item.remove();
+    });
+    commentList.forEach((comment) => {
+      const li = document.createElement("li");
+      li.classList.add("commentLi");
+      li.innerHTML = ` ${comment.username}: ${comment.creation_date} ${comment.comment}`;
+      commentUl.appendChild(li);
+    });
+  };
+  await drawComments();
 
   const commentCount = document.getElementById("commentCount");
-  const counted = await commentList.length;
+  let counted = counter();
   commentCount.innerHTML = `Comment(${counted})`;
 
   const submit = document.getElementById("submit");
@@ -69,7 +100,10 @@ const modalFnc = async (id) => {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    myModal.style.display = "none";
+    await getCommentList();
+    await drawComments();
+    counted = counter();
+    commentCount.innerHTML = `Comment(${counted})`;
   };
 
   myModal.appendChild(modalContent);
@@ -97,18 +131,41 @@ const drawMovies = (movies) => {
   movies.forEach((movie, id) => {
     const li = document.createElement("li");
     li.classList.add("movie");
+    li.id = `li${movie.id}`;
     li.innerHTML = `<img src="${movie.image.medium}" class="movie-img" alt="${movie.name}">`
-      + `<div class="movie-name-section"><p> ${movie.name}</p><i class="fa fa-heart-o" style="font-size:24px"></i></div>`
-      + '<p class="likes">5 Likes</p>'
-      + `<button id="comment${id}">Comments</button><br>`;
-
+      + `<div class="movie-name-section"><p> ${movie.name}</p><i class="likeBtn fa fa-heart-o" id="${movie.id}" style="font-size:24px"></i></div>`
+      + `<div class="like-div"><p class="likes" id="like${movie.id}">${movie.likes}</p><p> Likes</p></div>`
+      + `<button id="comment${id}" class="commentBtn">Comments</button><br>`;
     moviesUl.appendChild(li);
     document.getElementById(`comment${id}`).onclick = () => modalFnc(movie.id);
+    const likeBtn = document.getElementById(movie.id);
+    likeBtn.addEventListener("click", async () => {
+      const params = {
+        item_id: `${movie.id}`,
+      };
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      };
+      await fetch(likeUrl, options).then((response) => response.status);
+      const likeTag = document.getElementById(`like${movie.id}`);
+      const likeNum = parseInt(likeTag.innerHTML);
+      likeTag.innerHTML = likeNum + 1;
+    });
   });
+};
+
+const countMovies = async (film, target) => {
+  const numMovies = film.length;
+  target.innerHTML = `Movies(${numMovies})`;
 };
 
 const init = async () => {
   await myMovies.getMovies();
+  countMovies(myMovies.movieList, navCount);
   drawMovies(myMovies.movieList);
 };
 
