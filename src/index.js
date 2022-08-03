@@ -2,7 +2,7 @@
 import Movies from "./movies";
 import "./style.css";
 import counter from "./counter";
-// import logo_iflix from "./logo_iflix.png"
+
 const likeUrl =
   "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/";
 const navCount = document.getElementById("nav-count");

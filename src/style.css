@@ -1,6 +1,6 @@
 html {
   position: relative;
-  background-color: black;
+  background-color: #333;
   background-image: url('../assets/background1.jpg');
 }
 
@@ -50,7 +50,7 @@ header {
   justify-content: center;
   height: 55px;
   width: 100%;
-  background-color: black;
+  background-color: #333;
   margin-bottom: 2rem;
 }
 
@@ -130,7 +130,7 @@ nav a.hover {
 }
 
 .commentBtn {
-  background-color: rgb(7, 37, 37);
+  background-color : blueviolet;
   color: white;
   font-weight: bold;
   font-size: 17px;
@@ -142,15 +142,9 @@ nav a.hover {
 
 .modal {
   display: none;
-
-  /* Hidden by default */
   position: fixed;
-
-  /* Stay in place */
   z-index: 1;
-
-  /* Sit on top */
-  padding-top: 100px;
+  padding-top: 40px;
 
   /* Location of the box */
   left: 0;
@@ -158,18 +152,18 @@ nav a.hover {
   width: 100%;
 
   /* Full width */
-  height: 100%;
+  height: 90%;
 
   /* Full height */
   overflow: auto;
 
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
+  
+  background-color: #333;
 
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
+  
+  background-color: #333;
 
-  /* Black w/ opacity */
+
 }
 
 /* Modal Content */
@@ -179,7 +173,7 @@ nav a.hover {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 75%;
+  width: 65%;
 }
 
 .close-icon {
@@ -268,6 +262,6 @@ nav a.hover {
 
 footer {
   padding: 25px;
-  background-color: black;
+  background-color: #333;
   color: white;
 }
