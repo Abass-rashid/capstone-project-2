@@ -1,7 +1,6 @@
 /* /*eslint-disable */
-const baseUrl = "https://api.tvmaze.com/shows";
-const likeUrl =
-  "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/";
+const baseUrl = 'https://api.tvmaze.com/shows';
+const likeUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/';
 
 export default class Movies {
   constructor() {
