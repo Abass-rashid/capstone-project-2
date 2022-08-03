@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
-import Movies from './movies';
+import Movies from './movies.js';
 import './style.css';
-import counter from './counter';
+import counter from './counter.js';
 
 const likeUrl =
   'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/';
@@ -155,7 +155,7 @@ const drawMovies = (movies) => {
       };
       await fetch(likeUrl, options).then((response) => response.status);
       const likeTag = document.getElementById(`like${movie.id}`);
-      const likeNum = parseInt(likeTag.innerHTML);
+      const likeNum = parseInt(likeTag.innerHTML, 10);
       likeTag.innerHTML = likeNum + 1;
     });
   });
