@@ -1,14 +1,14 @@
 /* eslint-disable quotes */
-import Movies from "./movies";
-import "./style.css";
+import Movies from './movies.js';
+import './style.css';
 
-const commentUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/oFkkXhh8ZCM14YoilhgC/comments/";
+const commentUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/oFkkXhh8ZCM14YoilhgC/comments/';
 
 const myMovies = new Movies();
 
 const modalFnc = async (id) => {
-  const myModal = document.getElementById("myModal");
-  const modalContent = document.getElementById("modalContent");
+  const myModal = document.getElementById('myModal');
+  const modalContent = document.getElementById('modalContent');
   const getMovie = await myMovies.getMovie(id);
   const getComments = async () => {
     const request = await fetch(
@@ -35,27 +35,27 @@ const modalFnc = async (id) => {
     </form>
   `;
 
-  const commentUl = document.getElementById("commentUl");
+  const commentUl = document.getElementById('commentUl');
   let commentList = await getComments();
   if (commentList.error) {
     commentList = [];
   }
 
   commentList.forEach((comment) => {
-    const li = document.createElement("li");
+    const li = document.createElement('li');
     li.innerHTML = ` ${comment.username}: ${comment.creation_date} ${comment.comment}`;
     commentUl.appendChild(li);
   });
 
-  const commentCount = document.getElementById("commentCount");
+  const commentCount = document.getElementById('commentCount');
   const counted = await commentList.length;
   commentCount.innerHTML = `Comment(${counted})`;
 
-  const submit = document.getElementById("submit");
+  const submit = document.getElementById('submit');
   submit.onclick = async (e) => {
     e.preventDefault();
-    const username = document.getElementById("username");
-    const insight = document.getElementById("insight");
+    const username = document.getElementById('username');
+    const insight = document.getElementById('insight');
 
     const user = {
       item_id: `${id}`,
@@ -63,40 +63,40 @@ const modalFnc = async (id) => {
       comment: `${insight.value}`,
     };
     await fetch(commentUrl, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(user),
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        'Content-type': 'application/json; charset=UTF-8',
       },
     });
-    myModal.style.display = "none";
+    myModal.style.display = 'none';
   };
 
   myModal.appendChild(modalContent);
-  myModal.style.display = "block";
+  myModal.style.display = 'block';
 
-  const span = document.getElementsByClassName("close")[0];
+  const span = document.getElementsByClassName('close')[0];
 
   span.onclick = () => {
-    myModal.style.display = "none";
+    myModal.style.display = 'none';
   };
 
   window.onclick = (event) => {
     if (event.target === myModal) {
-      myModal.style.display = "none";
+      myModal.style.display = 'none';
     }
   };
 };
 
 const drawMovies = (movies) => {
-  const moviesUl = document.getElementById("movies");
-  const liToRemove = document.querySelectorAll("#movies li");
+  const moviesUl = document.getElementById('movies');
+  const liToRemove = document.querySelectorAll('#movies li');
   liToRemove.forEach((item) => {
     item.remove();
   });
   movies.forEach((movie, id) => {
-    const li = document.createElement("li");
-    li.classList.add("movie");
+    const li = document.createElement('li');
+    li.classList.add('movie');
     li.innerHTML = `<img src="${movie.image.medium}" class="movie-img" alt="${movie.name}">`
       + `<div class="movie-name-section"><p> ${movie.name}</p><i class="fa fa-heart-o" style="font-size:24px"></i></div>`
       + '<p class="likes">5 Likes</p>'
