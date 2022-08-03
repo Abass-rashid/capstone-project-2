@@ -130,7 +130,7 @@ nav a.hover {
 }
 
 .commentBtn {
-  background-color : blueviolet;
+  background-color: blueviolet;
   color: white;
   font-weight: bold;
   font-size: 17px;
@@ -156,14 +156,8 @@ nav a.hover {
 
   /* Full height */
   overflow: auto;
-
-  
   background-color: #333;
-
-  
   background-color: #333;
-
-
 }
 
 /* Modal Content */
