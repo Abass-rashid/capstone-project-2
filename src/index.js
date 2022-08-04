@@ -152,7 +152,7 @@ const drawMovies = (movies) => {
       };
       await fetch(likeUrl, options).then((response) => response.status);
       const likeTag = document.getElementById(`like${movie.id}`);
-      const likeNum = parseInt(likeTag.innerHTML);
+      const likeNum = likeTag.innerHTML;
       likeTag.innerHTML = likeNum + 1;
     });
   });
