@@ -1,11 +1,14 @@
-import Movies from "./movies";
-import "./style.css";
-import counter from "./counter";
 
-const likeUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/";
-const navCount = document.getElementById("nav-count");
-const commentUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/JJx6HiQiv6e42ZBiY0mG/comments";
+/* eslint-disable quotes */
+import Movies from './movies.js';
+import './style.css';
+import counter from './counter.js';
 
+const likeUrl =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/';
+const navCount = document.getElementById('nav-count');
+const commentUrl =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/JJx6HiQiv6e42ZBiY0mG/comments';
 const myMovies = new Movies();
 
 const modalFnc = async (id) => {
@@ -53,6 +56,7 @@ const modalFnc = async (id) => {
 
 
   const commentUl = document.getElementById("commentUl");
+
   let commentList = [];
 
   const getCommentList = async () => {
@@ -66,20 +70,20 @@ const modalFnc = async (id) => {
 
   const drawComments = async () => {
     await getCommentList();
-    const liToRemove = document.querySelectorAll("#commentUl li");
+    const liToRemove = document.querySelectorAll('#commentUl li');
     liToRemove.forEach((item) => {
       item.remove();
     });
     commentList.forEach((comment) => {
-      const li = document.createElement("li");
-      li.classList.add("commentLi");
+      const li = document.createElement('li');
+      li.classList.add('commentLi');
       li.innerHTML = ` ${comment.username}: ${comment.creation_date} ${comment.comment}`;
       commentUl.appendChild(li);
     });
   };
   await drawComments();
 
-  const commentCount = document.getElementById("commentCount");
+  const commentCount = document.getElementById('commentCount');
   let counted = counter();
 
   commentCount.innerHTML = `Comment(${counted})`;
@@ -126,32 +130,31 @@ const drawMovies = (movies) => {
     item.remove();
   });
   movies.forEach((movie, id) => {
-
-    const li = document.createElement("li");
-    li.classList.add("movie");
+    const li = document.createElement('li');
+    li.classList.add('movie');
     li.id = `li${movie.id}`;
-
-    li.innerHTML = `<img src="${movie.image.medium}" class="movie-img" alt="${movie.name}">`
-      + `<div class="movie-name-section"><p> ${movie.name}</p><i class="likeBtn fa fa-heart-o" id="${movie.id}" style="font-size:24px"></i></div>`
-      + `<div class="like-div"><p class="likes" id="like${movie.id}">${movie.likes}</p><p> Likes</p></div>`
-      + `<button id="comment${id}" class="commentBtn">Comments</button><br>`;
+    li.innerHTML =
+      `<img src="${movie.image.medium}" class="movie-img" alt="${movie.name}">` +
+      `<div class="movie-name-section"><p> ${movie.name}</p><i class="likeBtn fa fa-heart-o" id="${movie.id}" style="font-size:24px"></i></div>` +
+      `<div class="like-div"><p class="likes" id="like${movie.id}">${movie.likes}</p><p> Likes</p></div>` +
+      `<button id="comment${id}" class="commentBtn">Comments</button><br>`;
     moviesUl.appendChild(li);
     document.getElementById(`comment${id}`).onclick = () => modalFnc(movie.id);
     const likeBtn = document.getElementById(movie.id);
-    likeBtn.addEventListener("click", async () => {
+    likeBtn.addEventListener('click', async () => {
       const params = {
         item_id: `${movie.id}`,
       };
       const options = {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
       };
       await fetch(likeUrl, options).then((response) => response.status);
       const likeTag = document.getElementById(`like${movie.id}`);
-      const likeNum = parseInt(likeTag.innerHTML);
+      const likeNum = parseInt(likeTag.innerHTML, 10);
       likeTag.innerHTML = likeNum + 1;
     });
   });

@@ -1,6 +1,7 @@
 /* /*eslint-disable */
 const baseUrl = 'https://api.tvmaze.com/shows';
-const likeUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/JSE0hSFAswxrC4wkDks7/likes/';
+const likeUrl =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/';
 
 export default class Movies {
   constructor() {
@@ -27,7 +28,7 @@ export default class Movies {
       this.movieList[i].likes = 0;
     }
     likesList.forEach((like) => {
-      const i = parseInt(like.item_id);
+      const i = parseInt(like.item_id, 10);
       this.movieList.forEach((movie) => {
         if (movie.id === i) {
           movie.likes = like.likes;
