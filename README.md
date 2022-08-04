@@ -59,7 +59,7 @@ This project was deployed using Github pages
 👤 **Abazrashid Hassan**
 
 - GitHub: [@Abass-Rashid](https://github.com/Abass-rashid)
-- Twitter: [@AbassRashid10](https://twitter.com/C)
+- Twitter: [AbassRashid10](https://twitter.com/C)
 - LinkedIn: [abazrashid](https://linkedin.com/in/abazrashid)
 
 ## 🤝 Contributing
