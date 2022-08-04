@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Portfolio
-
+# Capstone-2 Movie App
+![screenshot](./assets/Readme.png)
 Capstone movie app is a second Capstone project in Microverse. This project summarises all the activities carried out in Module 2. In this project, a movie web application was developed using an external API. This web app has two interfaces and was developed by a team of two persons. The project was built using HTML/CSS and Javascript.
 
 ## Built With
