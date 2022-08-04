@@ -37,9 +37,6 @@ Clone the repo to your local machine
 run npm install to download the necessary modules.
 run npm start to load the project
 
-### Install
-
-### Usage
 
 ### Run tests
 
