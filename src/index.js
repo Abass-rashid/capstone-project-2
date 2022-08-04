@@ -1,3 +1,4 @@
+
 /* eslint-disable quotes */
 import Movies from './movies.js';
 import './style.css';
@@ -53,7 +54,9 @@ const modalFnc = async (id) => {
     </form>
   `;
 
-  const commentUl = document.getElementById('commentUl');
+
+  const commentUl = document.getElementById("commentUl");
+
   let commentList = [];
 
   const getCommentList = async () => {
@@ -82,6 +85,7 @@ const modalFnc = async (id) => {
 
   const commentCount = document.getElementById('commentCount');
   let counted = counter();
+
   commentCount.innerHTML = `Comment(${counted})`;
 
   const submit = document.getElementById('submit');
@@ -102,11 +106,6 @@ const modalFnc = async (id) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-    await getCommentList();
-    await drawComments();
-    counted = counter();
-    commentCount.innerHTML = `Comment(${counted})`;
-  };
 
   myModal.appendChild(modalContent);
   myModal.style.display = 'block';
