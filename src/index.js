@@ -171,5 +171,3 @@ const init = async () => {
 
 // eslint-disable-next-line no-restricted-globals
 onload = init();
-// OfwDnSwkDuWyZ8m9hUY4
-// JJx6HiQiv6e42ZBiY0mG
