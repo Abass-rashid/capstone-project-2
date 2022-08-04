@@ -13,7 +13,7 @@ Capstone movie app is a second Capstone project in Microverse. This project summ
 
 ## Live Demo (if available)
 
-[Live Demo Link]()
+[Live Demo Link]([Live Demo Link](https://abass-rashid.github.io/capstone-project-2/dist/))
 
 ## Getting Started
 
@@ -25,6 +25,8 @@ run npm start to load the project
 Basic HTML
 Basic CSS
 Javascript
+webpack
+ESlint
 
 ### Setup
 
@@ -56,9 +58,9 @@ This project was deployed using Github pages
 
 👤 **Abazrashid Hassan**
 
-- GitHub: [krisbobo](https://github.com/Abass-rashid)
-- Twitter: [ChrisboboSys](https://twitter.com/C)
-- LinkedIn: [kiyong-christian](https://linkedin.com/in/kiyo)
+- GitHub: [@Abass-Rashid](https://github.com/Abass-rashid)
+- Twitter: [@AbassRashid10](https://twitter.com/C)
+- LinkedIn: [abazrashid](https://linkedin.com/in/abazrashid)
 
 ## 🤝 Contributing
 
