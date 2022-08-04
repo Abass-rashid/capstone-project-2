@@ -3,11 +3,9 @@ import Movies from "./movies";
 import "./style.css";
 import counter from "./counter";
 // import logo_iflix from "./logo_iflix.png"
-const likeUrl =
-  "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/";
+const likeUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OfwDnSwkDuWyZ8m9hUY4/likes/";
 const navCount = document.getElementById("nav-count");
-const commentUrl =
-  "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/JJx6HiQiv6e42ZBiY0mG/comments";
+const commentUrl = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/JJx6HiQiv6e42ZBiY0mG/comments";
 const myMovies = new Movies();
 
 const modalFnc = async (id) => {
@@ -134,11 +132,10 @@ const drawMovies = (movies) => {
     const li = document.createElement("li");
     li.classList.add("movie");
     li.id = `li${movie.id}`;
-    li.innerHTML =
-      `<img src="${movie.image.medium}" class="movie-img" alt="${movie.name}">` +
-      `<div class="movie-name-section"><p> ${movie.name}</p><i class="likeBtn fa fa-heart-o" id="${movie.id}" style="font-size:24px"></i></div>` +
-      `<div class="like-div"><p class="likes" id="like${movie.id}">${movie.likes}</p><p> Likes</p></div>` +
-      `<button id="comment${id}" class="commentBtn">Comments</button><br>`;
+    li.innerHTML = `<img src="${movie.image.medium}" class="movie-img" alt="${movie.name}">`
+      + `<div class="movie-name-section"><p> ${movie.name}</p><i class="likeBtn fa fa-heart-o" id="${movie.id}" style="font-size:24px"></i></div>`
+      + `<div class="like-div"><p class="likes" id="like${movie.id}">${movie.likes}</p><p> Likes</p></div>`
+      + `<button id="comment${id}" class="commentBtn">Comments</button><br>`;
     moviesUl.appendChild(li);
     document.getElementById(`comment${id}`).onclick = () => modalFnc(movie.id);
     const likeBtn = document.getElementById(movie.id);
